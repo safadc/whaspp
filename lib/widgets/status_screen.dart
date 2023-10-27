@@ -12,15 +12,45 @@ class _StatusState extends State<Status> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://w0.peakpx.com/wallpaper/547/1017/HD-wallpaper-money-heist-ei-professor-profile-whatsapp-dp.jpg'),
+        ListTile(
+          leading: Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: const [
+              CircleAvatar(
+                radius: 28,
+                backgroundImage: NetworkImage(
+                    'https://w0.peakpx.com/wallpaper/547/1017/HD-wallpaper-money-heist-ei-professor-profile-whatsapp-dp.jpg'),
+              ),
+              Padding(
+                  padding: EdgeInsets.only(left: 34),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.green,
+                    radius: 11,
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ))
+            ],
           ),
           title: Text('Safad'),
           subtitle: Text('5 Minutes ago'),
-          trailing: Icon(Icons.more_horiz),
+          trailing: PopupMenuButton<StatusOption>(
+              onSelected: (option) {
+                switch (option) {
+                  case StatusOption.forward:
+                    break;
+                  case StatusOption.delete:
+                    break;
+                }
+              },
+              itemBuilder: (context) => <PopupMenuEntry<StatusOption>>[
+                    const PopupMenuItem(child: Text('forward')),
+                    const PopupMenuItem(child: Text('delete'))
+                  ],
+              child: Icon(Icons.more_horiz)),
         ),
         const Divider(
           thickness: 6,
@@ -42,6 +72,27 @@ class _StatusState extends State<Status> {
               final value = statusData[index];
               return StatusList(updates: value);
             }),
+        Padding(
+          padding: const EdgeInsets.only(right: 10, top: 5),
+          child: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {},
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.green,
+                )),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 10, top: 5),
+          child: FloatingActionButton(
+            onPressed: () {},
+            child: IconButton(
+                onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
+          ),
+        ),
       ],
     );
   }
@@ -107,3 +158,5 @@ List<UpdateStatus> statusData = [
           'https://static.toiimg.com/photo/msid-81746161/81746161.jpg',
       time: '25 Minutes ago'),
 ];
+
+enum StatusOption { forward, delete }

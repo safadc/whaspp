@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tabbar_demo/widgets/calling_screen.dart';
+import 'package:tabbar_demo/widgets/camera_screen.dart';
 import 'package:tabbar_demo/widgets/status_screen.dart';
 import 'package:tabbar_demo/widgets/chat_screen.dart';
 
@@ -98,12 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
         ),
         body: TabBarView(children: [
-          Container(),
+          const CameraScreen(),
           ChatListPage(),
           const Status(),
-          const Center(
-            child: Text('Call'),
-          ),
+          const CallingScreen(),
         ]),
       ),
     );
